@@ -11,6 +11,7 @@ const api = axios.create({
 ///////////////////////////////////////////////////////
 //////////////// GAME API SERVICES //////////////////
 ////////////////////////////////////////////////////
+
 export const gameService = 
 {
 
@@ -23,10 +24,12 @@ export const gameService =
 
       console.log(`RAWG response: ${response.status}, games: ${response.data.length}`)
       
- 
+ //// *** ADD MORE LATER ON HERE FOR GAME DETS
+
       const gamesWithFullData = await Promise.all
       (
-        response.data.map(async (game) => {
+        response.data.map(async (game) => 
+          {
           if (game.screenshots && game.screenshots.length > 0) 
             {
             return game;
@@ -136,6 +139,8 @@ export const gameService =
     }
   },
   
+/////// FIX LATER 
+
   removeLikedGame: async (gameId, userId) => {
     try {
 

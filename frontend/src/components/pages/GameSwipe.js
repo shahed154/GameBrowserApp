@@ -10,35 +10,45 @@ const GameSwipe = () =>
   const [nextGames, setNextGames] = useState([]);
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
-  const [error, setError] = useState("");
+  const [error, setError] = useState("")
   const { currentUser, isAuthenticated } = useContext(UserContext);
 
-  //////// INITIAL GAME LOAD //////////
-  useEffect(() => {
+  //////// INITIAL GAME LOAD /////////
+
+  useEffect(() => 
+    {
     const fetchGames = async () => {
       try {
-        console.log("Getting games, page:", page)
+        console.log("Getting games, page", page)
         setLoading(true)
         setError("")
         
-        const gamesData = await gameService.getTrendingGames(page)
+        const gamesData = await gameService.getTrendingGames(page);
+
         console.log("Games data:", gamesData)
         
-        if (gamesData && gamesData.length > 0) {
-          setCurrentGame(gamesData[0])
-          setNextGames(gamesData.slice(1))
+        if (gamesData && gamesData.length > 0)
+           {
+
+          setCurrentGame(gamesData[0]);
+          setNextGames(gamesData.slice(1));
+
         } else {
-          setError("No games available")
+          setError("No game available")
         }
-      } catch (error) {
+      } catch (error) 
+      {
         console.error('Error getting games:', error)
-        setError("Failed to load games. Try again.")
-      } finally {
+
+        setError("Failed to load games. Try again.");
+
+      } finally 
+      {
         setLoading(false)
       }
     }
 
-    fetchGames()
+    fetchGames();
   }, []) 
 
   ////// HANDLE GAME PREFERENCES /////

@@ -13,60 +13,76 @@ const Home = () =>
 
     ///// FETCH RECENT POPULAR GAMES //////
 
-    useEffect(() => {
-      const fetchGames = async () => {
+    useEffect(() => 
+      {
+      const fetchGames = async () => 
+        {
         try {
           setLoading(true)
           setError("")
           
-          console.log("Getting trending games")
           const gamesData = await gameService.getTrendingGames(1)
-          console.log("Games fetched:", gamesData)
+
+          console.log("Games fetched:", gamesData);
           
-          setGames(gamesData)
-        } catch (error) {
+          setGames(gamesData);
+          
+        } catch (error) 
+        {
           console.error('Error gettiung games:', error)
-          setError("Failed to load games")
-        } finally {
+
+          setError("Failed to load games");
+
+        } finally
+        {
           setLoading(false)
         }
       }
 
       fetchGames()
+
     }, [])
 
-    ////// HANDLE PREFERENCES ////
-    const handleLike = async (gameId) => {
-      if (!isAuthenticated) {
-        alert('Create an account to save your preferences')
-        return
-      }
 
+    ////// HANDLE PREFERENCES ////
+
+    const handleLike = async (gameId) => {
+      if (!isAuthenticated)
+         {
+        alert('Create ann account to save your preferences');
+        return;
+      }
       try {
         await gameService.saveGamePreference(gameId, true, currentUser._id);
-      } catch (error) {
-        console.error('Error saving like:', error)
+
+
+      } catch (error)
+       {
+        console.error('Error saving like:', error);
       }
     }
 
     const handleDislike = async (gameId) => {
-      if (!isAuthenticated) {
-        alert('Create an account to save your preferences')
-        return
+      if (!isAuthenticated)
+         {
+         alert('Create an account to save your preferences');
+        return;
       }
 
       try {
         await gameService.saveGamePreference(gameId, false, currentUser._id)
-      } catch (error) {
-        console.error(`Error saving dislike::`, error)
+      } catch (error)
+       {
+        console.error(`Error saving dislike:`, error)
       }
     }
 
     return (
+
       <div className="home-container">
         <div className="container">
           <div className="main-section">
-            <h1 className="main-title">Find Your Next Game</h1>
+            <h1 className="main-title">Find Your Next Game!</h1>
             <p className="main-subtitle">
               Popular releases from the last 60 days
             </p>
@@ -75,18 +91,28 @@ const Home = () =>
           <section className="trending-section">
             <h2 className="section-title">Trending Games</h2>
             
-            {loading ? (
+            {loading 
+            ? 
+            (
               <div className="loading-container">
+                 {/* ------------------ADD LOADING ANIM LATER ON ------------------*/}
                 <div className="spinner"></div>
                 <p>Loading games...</p>
               </div>
-            ) : error ? (
+            ) 
+            : 
+            error 
+            ? 
+            (
               <div className="error-container">
                 <p>{error}</p>
               </div>
-            ) : (
+            ) 
+            :
+            (
               <div className="games-grid">
-                {games.map(game => (
+                {games.map(game => 
+                (
                   <div key={game.id} className="game-card-wrapper">
                     <GameCard 
                       game={game}
