@@ -24,10 +24,11 @@ export const getGames = async (page = 1) =>
     
     const response = await axios.get(`${BASE_URL}/games`,
     {
+      /// was planning to allow for multiple pages to go through more games, but not enoughj time to add
       params: {
         key: API_KEY,
         page: page,
-        page_size: 4,
+        page_size: 20,
         dates: `${fromDate},${toDate}`, 
         ordering: '-added' 
       }
