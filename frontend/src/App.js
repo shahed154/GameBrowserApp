@@ -3,16 +3,14 @@ import React from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { UserProvider } from './context/UserContext'
 
-// Layout components
+
 import Navbar from './components/layout/Navbar'
 
-// Page components
 import Home from './components/pages/Home'
 import Profile from './components/pages/Profile'
 import AccountPage from './components/pages/AccountPage'
 import GameSwipe from './components/pages/GameSwipe'
 
-// Import global styles
 import './assets/styles/global.css'
 
 function App() {
@@ -20,7 +18,7 @@ function App() {
     <UserProvider>
       <Router>
         <Navbar />
-        <main className="main-content">
+        <main>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/profile" element={<Profile />} />

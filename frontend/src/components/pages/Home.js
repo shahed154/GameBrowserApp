@@ -61,42 +61,37 @@ const Home = () => {
   }
 
   return (
-    <div className="home-container">
-      <div className="container">
-        <div className="hero-section">
-          <h1 className="hero-title">Find Your Next Game</h1>
-          <p className="hero-subtitle">
-            Popular releases from the last 60 days
-          </p>
-        </div>
-
-        <section className="trending-section">
-          <h2 className="section-title">Trending Games</h2>
-          
-          {loading ? (
-            <div className="loading-container">
-              <div className="spinner"></div>
-              <p>Loading games...</p>
-            </div>
-          ) : error ? (
-            <div className="error-container">
-              <p>{error}</p>
-            </div>
-          ) : (
-            <div className="games-grid">
-              {games.map(game => (
-                <div key={game.id} className="game-card-wrapper">
-                  <GameCard 
-                    game={game}
-                    onLike={handleLike}
-                    onDislike={handleDislike}
-                  />
-                </div>
-              ))}
-            </div>
-          )}
-        </section>
+    <div className="container">
+      <div className="main">
+        <h1>Find Your Next Game</h1>
+        <p className="main-tagline">
+          Popular releases from the last 60 days
+        </p>
       </div>
+
+      <h2>Trending Games</h2>
+      
+      {loading ? (
+        <div>
+          <div className="spinner"></div>
+          <p>Loading games...</p>
+        </div>
+      ) : error ? (
+        <div>
+          <p>{error}</p>
+        </div>
+      ) : (
+        <div className="games-grid">
+          {games.map(game => (
+            <GameCard 
+              key={game.id}
+              game={game}
+              onLike={handleLike}
+              onDislike={handleDislike}
+            />
+          ))}
+        </div>
+      )}
     </div>
   )
 }

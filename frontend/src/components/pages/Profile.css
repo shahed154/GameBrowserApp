@@ -1,5 +1,5 @@
 .profile-container {
-  padding-top: var(--gap-l);
+  padding: var(--gap-l);
 }
 
 .profile-header {
@@ -8,38 +8,15 @@
 
 .profile-title {
   font-size: var(--text-l);
-  margin-bottom: var(--gap-m);
 }
 
 .profile-info {
   background-color: var(--bg-second);
-  padding: var(--gap-l);
-  max-width: 500px;
-  border-left: 3px solid var(--accent);
+  padding: var(--gap-m);
+  max-width: 400px;
 }
 
 .username {
   font-size: var(--text-l);
-  margin-bottom: var(--gap-s);
 }
 
-.email {
-  color: var(--text2);
-}
-
-.liked-games-section {
-  margin-bottom: var(--gap-l);
-}
-
-.remove-like-button {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  width: 30px;
-  height: 30px;
-  background-color: var(--bg-main);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--bad);
-}

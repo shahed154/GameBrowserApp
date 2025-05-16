@@ -17,11 +17,11 @@
   
 
   --gap-s: 8px;
-  --gap-m: 16px;
+  --gap-m: 14px;
   --gap-l: 32px;
   
-  --text-s: 0.875rem;
+  --text-s: 0.75rem;
   --text-m: 1rem;
-  --text-l: 1.25rem;
-  --text-xl: 1.75rem;
+  --text-l: 1.5rem;
+  --text-xl: 2rem;
 }

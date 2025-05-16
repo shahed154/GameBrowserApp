@@ -49,7 +49,7 @@ const Profile = () => {
 
   if (loading) {
     return (
-      <div className="loading-container">
+      <div>
         <div className="spinner"></div>
         <p>Loading profile...</p>
       </div>
@@ -57,52 +57,40 @@ const Profile = () => {
   }
 
   return (
-    <div className="profile-container">
-      <div className="container">
-        <div className="profile-header">
-          <h1 className="profile-title">My Profile</h1>
-          <div className="profile-info">
-            <h2 className="username">{currentUser.username}</h2>
-          </div>
-        </div>
-
-        <div className="liked-games-section">
-          <h2 className="section-title">Liked Games</h2>
-          
-          {loadingGames ? (
-            <div className="loading-container">
-              <div className="spinner"></div>
-              <p>Loading your liked games...</p>
-            </div>
-          ) : (
-            <>
-              {likedGames.length > 0 ? (
-                <div className="games-grid">
-                  {likedGames.map(game => (
-                    <div key={game.id} className="game-card-wrapper">
-                      <GameCard 
-                        game={game}
-                        showActions={false}
-                      />
-                      <button 
-                        className="remove-like-button"
-                        onClick={() => handleRemoveLike(game.id)}
-                        aria-label="Remove from liked games"
-                      >
-                        ✕
-                      </button>
-                    </div>
-                  ))}
-                </div>
-              ) : (
-                <div className="no-games-message">
-                  <p>You haven't liked any games yet</p>
-                </div>
-              )}
-            </>
-          )}
-        </div>
+    <div className="container">
+      <div className="profile-info">
+        <h2 className="user-name">{currentUser.username}</h2>
       </div>
+
+      <h2>Liked Games</h2>
+      
+      {loadingGames ? (
+        <div>
+          <div className="spinner"></div>
+          <p>Loading your liked games...</p>
+        </div>
+      ) : (
+        likedGames.length > 0 ? (
+          <div className="games-grid">
+            {likedGames.map(game => (
+              <div key={game.id}>
+                <GameCard 
+                  game={game}
+                  showActions={false}
+                />
+                <button 
+                  onClick={() => handleRemoveLike(game.id)}
+                  aria-label="Remove from liked games"
+                >
+                  ✕
+                </button>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <p>You haven't liked any games yet</p>
+        )
+      )}
     </div>
   )
 }

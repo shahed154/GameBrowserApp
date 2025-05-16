@@ -1,14 +1,12 @@
 .game-card {
   background-color: var(--bg-second);
-  display: flex;
   flex-direction: column;
-  border-left: 3px solid var(--accent);
 }
 
 .game-card-media {
   position: relative;
   width: 100%;
-  height: 250px;
+  height: 300px;
 }
 
 .game-card-image {
@@ -17,43 +15,26 @@
   object-fit: cover;
 }
 
-.game-card-placeholder {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: var(--bg-third);
-  color: var(--text2);
-}
 
 .game-card-content {
   padding: var(--gap-m);
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
 }
 
 .game-card-title {
   font-size: var(--text-l);
   margin-bottom: var(--gap-s);
-  font-weight: bold;
+
 }
 
-.game-card-meta {
-  margin-bottom: var(--gap-s);
-}
 
 .game-card-genres {
   display: flex;
-  flex-wrap: wrap;
   gap: var(--gap-s);
   margin-bottom: var(--gap-s);
 }
 
 .genre-tag {
-  display: inline-block;
-  padding: 2px 8px;
+  padding: 4px 10px;
   background-color: var(--bg-third);
   font-size: var(--text-s);
 }
@@ -61,17 +42,15 @@
 .game-card-description {
   margin-bottom: var(--gap-m);
   color: var(--text2);
-  flex-grow: 1;
 }
 
 .game-card-actions {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  margin-top: var(--gap-m);
 }
 
 .like-dislike-buttons {
+  margin-left: 300px;
   display: flex;
   gap: var(--gap-m);
 }
@@ -80,9 +59,6 @@
 .dislike-button {
   width: 40px;
   height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .image-nav {
@@ -101,19 +77,16 @@
   color: var(--text);
   width: 30px;
   height: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   font-size: 20px;
-  margin: 0 5px;
 }
 
 .image-counter {
   position: absolute;
   bottom: 10px;
   left: 10px;
-  background-color: var(--bg-second);
+
   color: var(--text);
-  padding: 2px 8px;
-  font-size: 12px;
+ 
+  font-size: var(--text-s);
+
 }

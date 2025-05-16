@@ -4,8 +4,7 @@ import { UserContext } from '../../context/UserContext'
 import GameCard from '../ui/GameCard'
 import './GameSwipe.css'
 
-const GameSwipe = () =>
-   {
+const GameSwipe = () => {
   const [currentGame, setCurrentGame] = useState(null)
   const [nextGames, setNextGames] = useState([])
   const [loading, setLoading] = useState(true)
@@ -90,12 +89,10 @@ const GameSwipe = () =>
       setCurrentGame(nextGames[0])
       setNextGames(prevGames => prevGames.slice(1))
       
-    
       if (nextGames.length <= 2) {
         loadMoreGames()
       }
     } else {
-  
       loadMoreGames()
     }
   }
@@ -117,59 +114,53 @@ const GameSwipe = () =>
   }
 
   return (
-    <div className="game-swipe-container">
-      <div className="container">
-        <h1 className="swipe-title">Find Your Next Game</h1>
-        <p className="swipe-subtitle">
-          Swipe through games and save your preferences
-        </p>
+    <div className="container">
+      <h1 className="swipe-title">Find Your Next Game</h1>
+      <p className="swipe-subtitle">
+        Swipe through games and save your preferences
+      </p>
 
-        <div className="swipe-area">
-          {loading ? (
-            <div className="loading-container">
-              <div className="spinner"></div>
-              <p>Loading games...</p>
-            </div>
-          ) : error ? (
-            <div className="error-container">
-              <p>{error}</p>
-            </div>
-          ) : (
+      <div className="swipe-area">
+        {loading ? (
+          <div>
+            <div className="spinner"></div>
+            <p>Loading games...</p>
+          </div>
+        ) : error ? (
+          <div>
+            <p>{error}</p>
+          </div>
+        ) : (
+          currentGame ? (
             <>
-              {currentGame ? (
-                <div className="swipe-card-container">
-                  <div className="swipe-card">
-                    <GameCard 
-                      game={currentGame}
-                      showActions={false}
-                    />
-                  </div>
-                  
-                  <div className="swipe-actions">
-                    <button 
-                      className="swipe-button dislike-button"
-                      onClick={handleDislike}
-                    >
-                      👎
-                    </button>
-                    
-                    <button 
-                      className="swipe-button like-button"
-                      onClick={handleLike}
-                    >
-                      👍
-                    </button>
-                  </div>
-                </div>
-              ) : (
-                <div className="no-games-message">
-                  <h3>No more games to show right now</h3>
-                  <p>Check back later for more recommendations!</p>
-                </div>
-              )}
+              <GameCard 
+                game={currentGame}
+                showActions={false}
+              />
+              
+              <div className="swipe-actions">
+                <button 
+                  className="swipe-btn dislike-btn"
+                  onClick={handleDislike}
+                >
+                  👎
+                </button>
+                
+                <button 
+                  className="swipe-btn like-btn"
+                  onClick={handleLike}
+                >
+                  👍
+                </button>
+              </div>
             </>
-          )}
-        </div>
+          ) : (
+            <div>
+              <h3>No more games to show right now</h3>
+              <p>Check back later for more recommendations!</p>
+            </div>
+          )
+        )}
       </div>
     </div>
   )

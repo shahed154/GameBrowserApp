@@ -12,49 +12,47 @@ const Navbar = () => {
   }
 
   return (
-    <nav className="navbar">
-      <div className="container navbar-container">
-        <Link to="/" className="navbar-logo">
+    <nav className="nav">
+      <div className="container nav-container">
+        <Link to="/" className="nav-logo">
           GameBrowser
         </Link>
 
-        <div className="navbar-menu">
-          <Link to="/" className="navbar-item">
+        <div className="nav-menu">
+          <Link to="/" className="nav-item">
             Home
           </Link>
           
-          <Link to="/swipe" className="navbar-item">
+          <Link to="/swipe" className="nav-item">
             Swipe
           </Link>
           
           {isAuthenticated && (
-            <Link to="/profile" className="navbar-item">
+            <Link to="/profile" className="nav-item">
               My Profile
             </Link>
           )}
           
-          <div className="user-info">
-            {isAuthenticated ? (
-              <>
-                <span className="navbar-item">
-                  {currentUser?.username}
-                </span>
-                <button 
-                  className="btn btn-secondary navbar-item" 
-                  onClick={handleLogout}
-                >
-                  Logout
-                </button>
-              </>
-            ) : (
-              <Link 
-                to="/account" 
-                className="btn btn-primary navbar-item"
+          {isAuthenticated ? (
+            <>
+              <span className="nav-item">
+                {currentUser?.username}
+              </span>
+              <button 
+                className="btn btn-secondary nav-item" 
+                onClick={handleLogout}
               >
-                Account
-              </Link>
-            )}
-          </div>
+                Logout
+              </button>
+            </>
+          ) : (
+            <Link 
+              to="/account" 
+              className="btn btn-primary nav-item"
+            >
+              Account
+            </Link>
+          )}
         </div>
       </div>
     </nav>
