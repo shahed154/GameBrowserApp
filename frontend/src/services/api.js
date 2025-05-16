@@ -11,24 +11,32 @@ const api = axios.create({
 ///////////////////////////////////////////////////////
 //////////////// GAME API SERVICES //////////////////
 ////////////////////////////////////////////////////
-export const gameService = {
-  getTrendingGames: async (page = 1) => {
+export const gameService = 
+{
+
+  getTrendingGames: async (page = 1) =>
+     {
     try {
-      console.log(`Fetching trending games, page ${page}`)
+    
       const response = await api.get(`/api/games/recommendations?page=${page}`)
-      console.log(`API response for trending games: ${response.status}, games: ${response.data.length}`)
+
+
+      console.log(`RAWG response: ${response.status}, games: ${response.data.length}`)
       
  
-      const gamesWithFullData = await Promise.all(
+      const gamesWithFullData = await Promise.all
+      (
         response.data.map(async (game) => {
-          if (game.screenshots && game.screenshots.length > 0) {
-            return game
+          if (game.screenshots && game.screenshots.length > 0) 
+            {
+            return game;
           }
           
-          try {
-            return await gameService.getGameDetails(game.id)
+          try 
+          {
+            return await gameService.getGameDetails(game.id);
           } catch (err) {
-            console.error(`Failed to load full details for game ${game.id}`)
+            console.error(`Failedd to load full details for game ${game.id}`)
             return game
           }
         })
@@ -36,44 +44,58 @@ export const gameService = {
       
       return gamesWithFullData
     } catch (error) {
-      console.error('Error fetching trending games:', error)
+
+
+      console.error('Error gettng trending games:', error);
+
       throw error
     }
   },
 
   getGameDetails: async (gameId) => {
     try {
-      console.log(`Fetching game details for ID: ${gameId}`)
+
       const response = await api.get(`/api/games/${gameId}`)
-      console.log(`Details fetched. Has screenshots: ${response.data.screenshots ? 'Yes' : 'No'}`)
+
+      console.log(`RECEIVED screenshots?: ${response.data.screenshots ? 'Yes' : 'No'}`)
       
       return response.data
     } catch (error) {
-      console.error(`Error fetching game details for ID ${gameId}:`, error)
+      console.error(`Error getting game details for ID ${gameId}:`, error);
       throw error
     }
   },
 
   saveGamePreference: async (gameId, liked, userId) => {
     try {
-      console.log(`Saving preference: Game ${gameId}, Liked: ${liked}, User: ${userId}`)
-      const response = await api.post('/api/users/preference', {
+
+      console.log(`Saving prefarences: Game ${gameId}, Liked: ${liked}, User: ${userId}`)
+
+      const response = await api.post('/api/users/preference', 
+
+        {
         gameId,
         liked,
         userId
       })
       return response.data
-    } catch (error) {
-      console.error('Error saving game preference:', error)
+    } catch (error) 
+    {
+
+      console.error('Error saving game preference:', error);
+
       throw error
     }
   },
 
   getUserLikedGames: async (userId) => {
-    try {
-      console.log(`Fetching liked games for user ${userId}`)
+    try
+     {
+      console.log(`GETTING LIKD GAMES FOR USER ${userId}`);
+
       const response = await api.get(`/api/games/user/${userId}/liked`)
-      console.log(`Liked games fetched: ${response.data.length}`)
+
+      console.log(`Liked games : ${response.data.length}`);
       
       const gamesWithFullData = await Promise.all(
         response.data.map(async (game) => {
@@ -81,12 +103,14 @@ export const gameService = {
             return game
           }
           
-          try {
+          try 
+          
+          {
             return await gameService.getGameDetails(game.id)
           } catch (err) 
           {
           
-            console.error(`Failed to load full details for game ${game.id}`)
+            console.error(`Failed to load  details ${game.id}`)
             return game
           }
         })
@@ -94,30 +118,40 @@ export const gameService = {
       
       return gamesWithFullData
     } catch (error) {
-      console.error('Error fetching liked games:', error)
+      console.error('Error gettinh liked games:', error);
       throw error
     }
   },
 
   loginOrCreateUser: async (username) => {
     try {
-      console.log(`Login/create for user: ${username}`)
-      const response = await api.post('/api/users/login-or-create', { username })
-      return response.data
+   
+      const response = await api.post('/api/users/login-or-create', { username });
+
+      return response.data;
+
     } catch (error) {
-      console.error('Error logging in or creating user:', error)
+      console.error('Error logging in / creating user:', error)
       throw error
     }
   },
   
   removeLikedGame: async (gameId, userId) => {
     try {
-      console.log(`Removing game ${gameId} from user ${userId}'s liked games`)
-      const response = await api.delete(`/api/users/liked-game/${userId}/${gameId}`)
+
+      console.log(`Removing game ${gameId} from user ${userId}'s liked games!!`);
+
+      const response = await api.delete(`/api/users/liked-game/${userId}/${gameId}`);
+
       return response.data
-    } catch (error) {
-      console.error('Error removing liked game:', error)
+
+    } catch (error) 
+
+    {
+
+      console.error('Error removing liked game:', error);
       throw error
     }
   }
+
 }

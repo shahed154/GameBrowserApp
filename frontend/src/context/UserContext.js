@@ -28,7 +28,7 @@ export const UserProvider = ({ children }) =>
 
     checkUser()
   }, [])
-  
+
   ///// LOGIN OR CREATE USER ///////
 
   const loginOrCreate = async (username) => 
