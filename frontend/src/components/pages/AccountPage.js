@@ -33,14 +33,15 @@ const AccountPage = () => {
         setError(result.message)
       } else if (result.isNew) 
         {
-        setMessage('Account created successfully!')
+        setMessage('Account created successfully')
       } else 
       {
 
-        setMessage(`Logged in successfully!`)
+        setMessage(`Log in sucesssfull!`)
 
       }
-    } catch (err) {
+    } catch (err)
+     {
       setError('ERRORRR')
       console.error(`Account error:`, err);
     } finally {
@@ -55,15 +56,18 @@ const AccountPage = () => {
   return (
     <div className="container">
       <div className="account-form">
+
         <h1 className="account-title">Log In / Create Account</h1>
         
-        {error && (
+        {error && 
+        (
           <div className="alert alert-error">
             {error}
           </div>
         )}
         
-        {message && (
+        {message && 
+        (
           <div className="alert alert-success">
             {message}
           </div>
@@ -73,12 +77,14 @@ const AccountPage = () => {
           <div>
             <label htmlFor="username">Username</label>
             <input
+
               type="text"
               id="username"
               className="form-input"
-              placeholder="Enter your username"
+              placeholder="Enter username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
+
             />
             <p>
               Enter a username to log in or create a new account

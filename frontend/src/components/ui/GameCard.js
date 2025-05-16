@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import { gameService } from '../../services/api'
-import './GameCard.css'
+import { gameService } from '../../services/api';
+import './GameCard.css';
 
 const GameCard = ({ game, onLike, onDislike, showActions = true }) => {
   const [expanded, setExpanded] = useState(false)
@@ -8,10 +8,11 @@ const GameCard = ({ game, onLike, onDislike, showActions = true }) => {
   const [loading, setLoading] = useState(false)
   const [gameDetails, setGameDetails] = useState(null)
   
-  if (!game) return null
+  if (!game) return null;
 
-  const getImages = () => {
-    const images = []
+  const getImages = () => 
+  {
+    const images = [];
     
     if (game.background_image) {
       images.push({
@@ -25,7 +26,7 @@ const GameCard = ({ game, onLike, onDislike, showActions = true }) => {
         if (screenshot.image) {
           images.push({
             src: screenshot.image,
-            alt: `${game.name} screenshot`
+            alt: `${game.name} screenashot`
           })
         }
       })
@@ -39,13 +40,13 @@ const GameCard = ({ game, onLike, onDislike, showActions = true }) => {
   
 
   const handlePrevImage = () => {
-    if (images.length <= 1) return
-    setCurrentImageIndex(prev => (prev === 0 ? images.length - 1 : prev - 1))
+    if (images.length <= 1) return;
+    setCurrentImageIndex(prev => (prev === 0 ? images.length - 1 : prev - 1));
   }
 
   const handleNextImage = () => {
     if (images.length <= 1) return
-    setCurrentImageIndex(prev => (prev + 1) % images.length)
+    setCurrentImageIndex(prev => (prev + 1) % images.length);
   }
   
 
@@ -78,9 +79,11 @@ const GameCard = ({ game, onLike, onDislike, showActions = true }) => {
       const details = await gameService.getGameDetails(game.id)
       setGameDetails(details)
       setExpanded(true)
-    } catch (error) {
+    } catch (error)
+     {
       console.error("Failed to load game details:", error)
-    } finally {
+    } finally 
+    {
       setLoading(false)
     }
   }
@@ -88,7 +91,9 @@ const GameCard = ({ game, onLike, onDislike, showActions = true }) => {
   return (
     <div className="game-card">
       <div className="game-card-media">
-        {currentImage ? (
+        {currentImage 
+        ?
+         (
           <>
             <img 
               src={currentImage.src} 
@@ -118,7 +123,9 @@ const GameCard = ({ game, onLike, onDislike, showActions = true }) => {
               </>
             )}
           </>
-        ) : (
+        ) 
+        : 
+        (
           <div className="game-card-placeholder">
             <span>No Image</span>
           </div>
@@ -136,7 +143,8 @@ const GameCard = ({ game, onLike, onDislike, showActions = true }) => {
         
         {game.genres && game.genres.length > 0 && (
           <div className="game-card-genres">
-            {game.genres.map(genre => (
+            {game.genres.map(genre =>
+             (
               <span key={genre.id} className="genre-tag">
                 {genre.name}
               </span>
@@ -156,7 +164,8 @@ const GameCard = ({ game, onLike, onDislike, showActions = true }) => {
             {loading ? "Loading..." : expanded ? "Show Less" : "Show More"}
           </button>
           
-          {showActions && onLike && onDislike && (
+          {showActions && onLike && onDislike && 
+          (
             <div className="like-dislike-buttons">
               <button 
                 className="like-button"
@@ -173,6 +182,8 @@ const GameCard = ({ game, onLike, onDislike, showActions = true }) => {
               </button>
             </div>
           )}
+
+          
         </div>
       </div>
     </div>

@@ -9,7 +9,7 @@ import { fileURLToPath } from "url"
 import { dirname } from 'path';
 import { connectDB } from "./db.js";
 
-import authRoutes from './routes/auth.js'  
+// import authRoutes from './routes/auth.js'  
 import gameRoutes from './routes/games.js';  
 import userRoutes from "./routes/users.js";
 
@@ -43,7 +43,7 @@ app.use(express.json());
 
 /// ROUTES
 
-app.use("/api/auth", authRoutes);
+// app.use("/api/auth", authRoutes);
 app.use('/api/games', gameRoutes); 
 app.use('/api/users', userRoutes)
 
@@ -54,6 +54,6 @@ app.use((err, req, res, next) => {
 });
 
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`)
-});
+// app.listen(PORT, () => {
+//   console.log(`Server running on port ${PORT}`)
+// });
