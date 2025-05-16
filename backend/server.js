@@ -1,4 +1,4 @@
-import express from "express";
+import express from "express"
 import cors from 'cors';
 import mongoose from 'mongoose';  
 
@@ -44,13 +44,13 @@ app.use(express.json());
 /// ROUTES
 
 app.use("/api/auth", authRoutes);
-app.use('/api/games', gameRoutes);  // Fixed backticks to single quotes
+app.use('/api/games', gameRoutes); 
 app.use('/api/users', userRoutes)
 
 //// ERRORs
 app.use((err, req, res, next) => {
   console.error(err.stack);
-  res.status(500).json({ message: "Something went wrong!" });
+  res.status(500).json({ message: "SERVER ERROR!" });
 });
 
 

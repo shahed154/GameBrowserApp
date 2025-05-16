@@ -1,25 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { UserProvider } from './context/UserContext'
+
+// Layout components
+import Navbar from './components/layout/Navbar'
+
+// Page components
+import Home from './components/pages/Home'
+import Profile from './components/pages/Profile'
+import AccountPage from './components/pages/AccountPage'
+import GameSwipe from './components/pages/GameSwipe'
+
+// Import global styles
+import './assets/styles/global.css'
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <UserProvider>
+      <Router>
+        <Navbar />
+        <main className="main-content">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/account" element={<AccountPage />} />
+            <Route path="/swipe" element={<GameSwipe />} />
+            <Route path="*" element={<Home />} />
+          </Routes>
+        </main>
+      </Router>
+    </UserProvider>
+  )
 }
 
-export default App;
+export default App

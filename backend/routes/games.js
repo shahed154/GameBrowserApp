@@ -1,91 +1,89 @@
-
 import express from "express"
+// * is faster than just writing out all the exports
 import * as gameApiService from '../services/rawgApi.js';
 import User from '../models/User.js';
 
-const router = express.Router();
+const router = express.Router()
 
-///   GET RECOMENDATIONS
+///  GET RECOMMENDATIONS
 
 router.get(`/recommendations`, async (req, res) => 
 {
   try 
   {
-    const games = await gameApiService.getGames(req.query)
+    const page = req.query.page || 1
+    const games = await gameApiService.getGames(page)
     res.json(games);
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server error");
   }
-});
+})
 
-/// GET GAME DETAIILS 
+/// GET GAME DETAILSS 
 router.get('/:id', async (req, res) => {
   try 
   {
     const game = await gameApiService.getGameDetails(req.params.id);
     res.json(game)
   } catch (err) {
-    console.error(err.message);
-    res.status(500).send(`Server error`);
+    console.error(err.message)
+      res.status(500).send(`Server error`);
   }
-});
-
-//// PREFERENCES  POST
-router.post(`/preference`, async (req, res) => {
-  try 
-  {
-    const { gameId, liked, userId } = req.body;
-    
-    const user = await User.findById(userId);
-    
-    if (!user) {
-      return res.status(404).json({ message: 'USER NOT FOUND' })
-    }
-    
-    if (liked) {
-      if (!user.likedGames.includes(gameId)) {
-        user.likedGames.push(gameId);
-      }
-  
-      user.dislikedGames = user.dislikedGames.filter(id => id !== gameId);
-    } else {
-      if (!user.dislikedGames.includes(gameId)) {
-        user.dislikedGames.push(gameId);
-      }
-
-      user.likedGames = user.likedGames.filter(id => id !== gameId)
-    }
-    
-    await user.save();
-    
-    res.json({ message: `Preferencee saved` })
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).send("SERVER ERROR");
-  }
-});
+})
 
 ///// GET LIKED GAMES
 router.get("/user/:userId/liked", async (req, res) => {
   try 
   {
-    const user = await User.findById(req.params.userId);
+
+    const user = await User.findById(req.params.userId)
     
-    if (!user) {
-      return res.status(404).json({ message: 'USER NOT FOUND' });
+
+    if (!user)
+       {
+      return res.status(404).json({ message: 'USER NOT FOUND' })
     }
 
-    const likedGamesDetails = await Promise.all(
+    const likedGamesDetails = await Promise.all
+    (
       user.likedGames.map(gameId => gameApiService.getGameDetails(gameId))
     )
     
-    res.json(likedGamesDetails)
+    res.json(likedGamesDetails);
   } catch (err) {
-    console.error(err.message);
-       res.status(500).send("SERVER ERROR");
-
+    console.error(err.message)
+    res.status(500).send("SERVER ERROR")
   }
-});
+})
+
+
+
+// change liked to dislike if need to make a disliked section,. IN FUTURE  ***
+
+// router.get("/user/:userId/liked", async (req, res) => {
+//   try 
+//   {
+//     const user = await User.findById(req.params.userId);
+    
+//     if (!user) 
+//       {
+//       return res.status(404).json({ message: 'USER NOT FOUND' });
+//     }
+
+//     const likedGamesDetails = await Promise.all
+//     (
+//       // get game details from the liked games array 
+//       user.likedGames.map(gameId => 
+//         gameApiService.getGameDetails(gameId))
+//     )
+    
+//     res.json(likedGamesDetails)
+//   } catch (err) {
+//     console.error(err.message);
+//        res.status(500).send("SERVER ERROR");
+
+//   }
+// });
 
 export default router

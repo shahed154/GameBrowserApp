@@ -1,39 +1,48 @@
-
-
 import axios from 'axios';
-import Game from '../models/Game.js';
 import dotenv from 'dotenv';
-
 
 dotenv.config();
 
 const API_KEY = process.env.RAWG_API_KEY;
 const BASE_URL = "https://api.rawg.io/api"
 
-
-// GAMES LIST
-
-
-export const getGames = async (params = {}) => 
+// GAMES LIST - POPULAR GAMES FROM LAST __  DAYS
+export const getGames = async (page = 1) => 
 {
   try 
   {
-    const response = await axios.get(`${BASE_URL}/games`, {
+   // checks 60 days ago or change for more days 
+    let daysToCheck = 60;
+    const today = new Date();
+    const thirtyDaysAgo = new Date(today);
+    thirtyDaysAgo.setDate(today.getDate() - daysToCheck)
+    
+    // had tio format dates as YYYY-MM-DD in order to get the API working
+    // https://stackoverflow.com/questions/23593052/format-javascript-date-as-yyyy-mm-dd copied from this 
+    const fromDate = thirtyDaysAgo.toISOString().split('T')[0]
+    const toDate = today.toISOString().split('T')[0]
+    
+    const response = await axios.get(`${BASE_URL}/games`,
+    {
       params: {
         key: API_KEY,
-        page_size: 20,
-        ...params
+        page: page,
+        page_size: 4,
+        dates: `${fromDate},${toDate}`, 
+        ordering: '-added' 
       }
     });
     
-    return response.data.results
+
+    return response.data.results;
   } catch (error) {
-    console.error("Error getting games from RAWG:", error);
+    console.error("Error getting games from RAWG:", error)
     throw new Error(`Failed to get games`)
   }
 };
 
-// GAME DETAilS
+
+// GAME DETAILS
 
 export const getGameDetails = async (gameId) => {
   try 
@@ -44,14 +53,14 @@ export const getGameDetails = async (gameId) => {
     
     const screenshotsResponse = await axios.get(`${BASE_URL}/games/${gameId}/screenshots`, {
       params: { key: API_KEY }
-    });
+    })
     
     return {
       ...response.data,
       screenshots: screenshotsResponse.data.results
     }
   } catch (error) {
-    console.error(`Error getting game details for ID ${gameId}:`, error);
-    throw new Error("Failed to get game details");
+    console.error(`Error getting game details for ID ${gameId}:`, error)
+    throw new Error("Failed to get game details")
   }
-};
+}
