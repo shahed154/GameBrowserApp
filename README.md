@@ -1,4 +1,4 @@
-# GameBrowserApp
+# Game Browser App
 Full-Stack Application Using MERN Stack
 
 ### Overview
