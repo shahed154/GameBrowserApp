@@ -1,23 +1,23 @@
 import React, { useState, useEffect, useContext } from 'react'
-import { gameService } from '../../services/api'
-import { UserContext } from '../../context/UserContext'
+import { gameService } from '../../services/api';
+import { UserContext } from "../../context/UserContext";
 import GameCard from '../ui/GameCard'
-import './GameSwipe.css'
+import './GameSwipe.css';
 
 const GameSwipe = () =>
    {
-  const [currentGame, setCurrentGame] = useState(null)
-  const [nextGames, setNextGames] = useState([])
-  const [loading, setLoading] = useState(true)
-  const [page, setPage] = useState(1)
-  const [error, setError] = useState("")
-  const { currentUser, isAuthenticated } = useContext(UserContext)
+  const [currentGame, setCurrentGame] = useState(null);
+  const [nextGames, setNextGames] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [page, setPage] = useState(1);
+  const [error, setError] = useState("");
+  const { currentUser, isAuthenticated } = useContext(UserContext);
 
   //////// INITIAL GAME LOAD //////////
   useEffect(() => {
     const fetchGames = async () => {
       try {
-        console.log("Fetching games, page:", page)
+        console.log("Getting games, page:", page)
         setLoading(true)
         setError("")
         
@@ -31,8 +31,8 @@ const GameSwipe = () =>
           setError("No games available")
         }
       } catch (error) {
-        console.error('Error fetching games:', error)
-        setError("Failed to load games. Try again later.")
+        console.error('Error getting games:', error)
+        setError("Failed to load games. Try again.")
       } finally {
         setLoading(false)
       }

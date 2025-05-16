@@ -1,29 +1,31 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { Navigate } from 'react-router-dom'
-import { gameService } from '../../services/api'
-import { UserContext } from '../../context/UserContext'
-import GameCard from '../ui/GameCard'
+import { gameService } from '../../services/api';
+import { UserContext } from '../../context/UserContext';
+import GameCard from '../ui/GameCard';
 import './Profile.css'
 
 const Profile = () => {
   const { currentUser, isAuthenticated, loading } = useContext(UserContext)
   const [likedGames, setLikedGames] = useState([])
-  const [loadingGames, setLoadingGames] = useState(true)
+  const [loadingGames, setLoadingGames] = useState(true);
 
-  //////////////// FETCH LIKED GAMES ////////////////
-
+  ///// FETCH LIKED GAMES /////
 
   useEffect(() => {
     const fetchLikedGames = async () => {
       if (!isAuthenticated || !currentUser) return
 
       try {
-        setLoadingGames(true)
-        const games = await gameService.getUserLikedGames(currentUser._id)
-        setLikedGames(games)
-      } catch (error) {
+        setLoadingGames(true);
+        const games = await gameService.getUserLikedGames(currentUser._id);
+        setLikedGames(games);
+
+      } catch (error) 
+      {
         console.error('Error fetching liked games:', error)
-      } finally {
+      } finally 
+      {
         setLoadingGames(false)
       }
     }
@@ -33,12 +35,13 @@ const Profile = () => {
     }
   }, [currentUser, isAuthenticated])
 
-  /////// HANDLE REMOVING LIKED GAME ///////
+  ///// HANDLE REMOVING LIKED GAME ////
 
-  
+
   const handleRemoveLike = async (gameId) => {
-    try {
-      await gameService.removeLikedGame(gameId, currentUser._id)
+    try 
+    {
+      await gameService.removeLikedGame(gameId, currentUser._id);
       setLikedGames(prevGames => 
         prevGames.filter(game => game.id !== gameId)
       )
@@ -81,7 +84,9 @@ const Profile = () => {
             <>
               {likedGames.length > 0 ? (
                 <div className="games-grid">
-                  {likedGames.map(game => (
+
+                  {likedGames.map(game => 
+                  (
                     <div key={game.id} className="game-card-wrapper">
                       <GameCard 
                         game={game}

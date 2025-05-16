@@ -1,10 +1,11 @@
 import React from 'react'
 
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import { UserProvider } from './context/UserContext'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
+import { UserProvider } from "./context/UserContext"
 
 //
-import Navbar from './components/layout/Navbar'
+import Navbar from './components/layout/Navbar';
 
 
 import Home from './components/pages/Home'

@@ -1,41 +1,48 @@
 import React, { useState, useContext } from 'react'
-import { Navigate } from 'react-router-dom'
+import { Navigate } from 'react-router-dom';
 import { UserContext } from '../../context/UserContext'
 
 const AccountPage = () => {
-  const [username, setUsername] = useState('')
-  const [error, setError] = useState('')
-  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [username, setUsername] = useState('');
+  const [error, setError] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [message, setMessage] = useState('')
   
-  const { loginOrCreate, isAuthenticated } = useContext(UserContext)
+
+  const { loginOrCreate, isAuthenticated } = useContext(UserContext);
   
-  ///// ACCOUNT HANDLER ///////
+  ///// ACCOUNT HANDLING ///////
   const handleSubmit = async (e) => {
     e.preventDefault()
     
     try {
       setIsSubmitting(true)
-      setError('')
+      setError('');
+
       setMessage('')
       
       if (!username.trim()) {
-        setError('Please enter a username')
+        setError('ENTER A USERNAME')
         return
       }
       
       const result = await loginOrCreate(username.trim())
       
-      if (!result.success) {
+      if (!result.success) 
+        {
         setError(result.message)
-      } else if (result.isNew) {
+      } else if (result.isNew) 
+        {
         setMessage('Account created successfully!')
-      } else {
-        setMessage('Logged in successfully!')
+      } else 
+      {
+
+        setMessage(`Logged in successfully!`)
+
       }
     } catch (err) {
-      setError('An error occurred. Please try again.')
-      console.error('Account error:', err)
+      setError('ERRORRR')
+      console.error(`Account error:`, err);
     } finally {
       setIsSubmitting(false)
     }
