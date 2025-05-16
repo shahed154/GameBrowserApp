@@ -5,39 +5,39 @@ Full-Stack Application Using MERN Stack
 
 Simple web application that lets users find and save games they're interested in by browsing games and liking or disliking them. It's built with React for frontend and Node.js/Express/MongoDB for the backend. 
 
-### Technologies Used
+## Technologies Used
 
-Frontend
+### Frontend
 
-React.js
-CSS with custom variables
-Axios for API requests
+- React.js
+- CSS with custom variables
+- Axios for API requests
 
-Backend
+### Backend
 
-Node.js
-Express
-MongoDB with Mongoose
-RAWG Video Games API integration
+- Node.js
+- Express
+- MongoDB with Mongoose
+- RAWG Video Games API integration
 
 https://rawg.io/apidocs
 
 ### Description
 
-Discover games
+## Discover games
 
-Home page shows trending games from the last 60 days
-View game details including screenshots, and description
-Dynamic image carousel for each game
+- Home page shows trending games from the last 60 days
+- View game details including screenshots, and description
+- Dynamic image carousel for each game
 
-User Experience
+## User Experience
 
-Like/dislike functionality to save preferences
-Responsive design for different screen sizes
+- Like/dislike functionality to save preferences
+- Responsive design for different screen sizes
 
-User System
+## User System
 
-Simple account creation with just a username, authentication using JWT is a WIP
-Persistent login with localStorage currently 
-Personal profile page to view liked games
+- Simple account creation with just a username, authentication using JWT is a WIP
+- Persistent login with localStorage currently 
+- Personal profile page to view liked games
 
