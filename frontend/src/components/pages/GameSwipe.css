@@ -1,4 +1,3 @@
-
 .swipe-title {
   text-align: center;
   font-size: var(--text-xl);
@@ -16,7 +15,6 @@
   margin: 0 auto;
   padding: var(--gap-m);
   min-height: 650px;
-
 }
 
 .swipe-actions {
@@ -32,4 +30,3 @@
   background-color: var(--accent2);
   font-size: 24px;
 }
-

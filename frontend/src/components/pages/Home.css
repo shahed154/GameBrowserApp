@@ -1,8 +1,8 @@
-.main {
+.main-section {
   text-align: center;
   margin: var(--gap-l);
 }
 
-.main-tagline {
+.main-subtitle {
   color: var(--text2);
 }

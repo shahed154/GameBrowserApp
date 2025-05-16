@@ -6,10 +6,6 @@
   margin-bottom: var(--gap-l);
 }
 
-.profile-title {
-  font-size: var(--text-l);
-}
-
 .profile-info {
   background-color: var(--bg-second);
   padding: var(--gap-m);
@@ -19,4 +15,3 @@
 .username {
   font-size: var(--text-l);
 }
-

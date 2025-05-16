@@ -87,55 +87,55 @@ const GameCard = ({ game, onLike, onDislike, showActions = true }) => {
 
   return (
     <div className="game-card">
-      <div className="card-media">
+      <div className="game-card-media">
         {currentImage ? (
           <>
             <img 
               src={currentImage.src} 
               alt={currentImage.alt || game.name} 
-              className="card-img" 
+              className="game-card-image" 
             />
             
             {images.length > 1 && (
               <>
-                <div className="img-nav">
+                <div className="image-nav">
                   <button 
-                    className="img-nav-btn"
+                    className="image-nav-button"
                     onClick={handlePrevImage}
                   >
                     ‹
                   </button>
                   <button 
-                    className="img-nav-btn"
+                    className="image-nav-button"
                     onClick={handleNextImage}
                   >
                     ›
                   </button>
                 </div>
-                <div className="img-counter">
+                <div className="image-counter">
                   {currentImageIndex + 1} / {images.length}
                 </div>
               </>
             )}
           </>
         ) : (
-          <div>
+          <div className="game-card-placeholder">
             <span>No Image</span>
           </div>
         )}
       </div>
       
-      <div className="card-content">
-        <h3 className="card-title">{game.name}</h3>
+      <div className="game-card-content">
+        <h3 className="game-card-title">{game.name}</h3>
         
         {game.metacritic && (
-          <div>
+          <div className="game-card-meta">
             <span>Score: {game.metacritic}</span>
           </div>
         )}
         
         {game.genres && game.genres.length > 0 && (
-          <div className="card-genres">
+          <div className="game-card-genres">
             {game.genres.map(genre => (
               <span key={genre.id} className="genre-tag">
                 {genre.name}
@@ -144,11 +144,11 @@ const GameCard = ({ game, onLike, onDislike, showActions = true }) => {
           </div>
         )}
         
-        <p className="card-desc">
+        <p className="game-card-description">
           {getDescription()}
         </p>
         
-        <div className="card-actions">
+        <div className="game-card-actions">
           <button 
             className="btn btn-secondary"
             onClick={handleShowMore}
@@ -157,16 +157,16 @@ const GameCard = ({ game, onLike, onDislike, showActions = true }) => {
           </button>
           
           {showActions && onLike && onDislike && (
-            <div className="vote-buttons">
+            <div className="like-dislike-buttons">
               <button 
-                className="like-btn"
+                className="like-button"
                 onClick={() => onLike(game.id)}
               >
                 👍
               </button>
               
               <button 
-                className="dislike-btn"
+                className="dislike-button"
                 onClick={() => onDislike(game.id)}
               >
                 👎

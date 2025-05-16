@@ -15,7 +15,6 @@
   object-fit: cover;
 }
 
-
 .game-card-content {
   padding: var(--gap-m);
 }
@@ -23,9 +22,7 @@
 .game-card-title {
   font-size: var(--text-l);
   margin-bottom: var(--gap-s);
-
 }
-
 
 .game-card-genres {
   display: flex;
@@ -50,7 +47,7 @@
 }
 
 .like-dislike-buttons {
-  margin-left: 300px;
+  margin-left: auto;
   display: flex;
   gap: var(--gap-m);
 }
@@ -84,9 +81,6 @@
   position: absolute;
   bottom: 10px;
   left: 10px;
-
   color: var(--text);
- 
   font-size: var(--text-s);
-
 }

@@ -12,47 +12,49 @@ const Navbar = () => {
   }
 
   return (
-    <nav className="nav">
-      <div className="container nav-container">
-        <Link to="/" className="nav-logo">
+    <nav className="navbar">
+      <div className="container navbar-container">
+        <Link to="/" className="navbar-logo">
           GameBrowser
         </Link>
 
-        <div className="nav-menu">
-          <Link to="/" className="nav-item">
+        <div className="navbar-menu">
+          <Link to="/" className="navbar-item">
             Home
           </Link>
           
-          <Link to="/swipe" className="nav-item">
+          <Link to="/swipe" className="navbar-item">
             Swipe
           </Link>
           
           {isAuthenticated && (
-            <Link to="/profile" className="nav-item">
+            <Link to="/profile" className="navbar-item">
               My Profile
             </Link>
           )}
           
-          {isAuthenticated ? (
-            <>
-              <span className="nav-item">
-                {currentUser?.username}
-              </span>
-              <button 
-                className="btn btn-secondary nav-item" 
-                onClick={handleLogout}
+          <div className="user-info">
+            {isAuthenticated ? (
+              <>
+                <span className="navbar-item">
+                  {currentUser?.username}
+                </span>
+                <button 
+                  className="btn btn-secondary navbar-item" 
+                  onClick={handleLogout}
+                >
+                  Logout
+                </button>
+              </>
+            ) : (
+              <Link 
+                to="/account" 
+                className="btn btn-primary navbar-item"
               >
-                Logout
-              </button>
-            </>
-          ) : (
-            <Link 
-              to="/account" 
-              className="btn btn-primary nav-item"
-            >
-              Account
-            </Link>
-          )}
+                Account
+              </Link>
+            )}
+          </div>
         </div>
       </div>
     </nav>
