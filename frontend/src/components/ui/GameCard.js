@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { gameService } from '../../services/api'
 import './GameCard.css'
 
@@ -7,27 +7,23 @@ const GameCard = ({ game, onLike, onDislike, showActions = true }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
   const [loading, setLoading] = useState(false)
   const [gameDetails, setGameDetails] = useState(null)
-  const [images, setImages] = useState([])
   
-  ///////// IMAGES FOR CAROUSEL /////////
- 
-  useEffect(() => {
-    if (!game) return
+  if (!game) return null
+
+  const getImages = () => {
+    const images = []
     
-    let imageArray = []
-    
-   
     if (game.background_image) {
-      imageArray.push({
+      images.push({
         src: game.background_image,
         alt: game.name
       })
     }
- 
+    
     if (game.screenshots && game.screenshots.length > 0) {
       game.screenshots.forEach(screenshot => {
         if (screenshot.image) {
-          imageArray.push({
+          images.push({
             src: screenshot.image,
             alt: `${game.name} screenshot`
           })
@@ -35,88 +31,52 @@ const GameCard = ({ game, onLike, onDislike, showActions = true }) => {
       })
     }
     
-    setImages(imageArray)
-  }, [game])
-
-  if (!game) return null
-
-  ////////// DESCRIPTION HANDLING //////////
-  const getDisplayDescription = () => {
-
-    if (loading) {
-      return "Loading..."
-    }
-    
-   
-    if (expanded && gameDetails && gameDetails.description) {
-      const cleanText = gameDetails.description.replace(/<\/?[^>]+(>|$)/g, '')
-      return cleanText
-    }
-    
-   
-    let shortDesc = game.description || ""
-    
-    // Clean HTML tags
-    shortDesc = shortDesc.replace(/<\/?[^>]+(>|$)/g, '')
- 
-    if (!expanded && shortDesc.length > 150) {
-      return shortDesc.substring(0, 150) + "..."
-    }
-    
-    return shortDesc
+    return images
   }
+  
+  const images = getImages()
+  const currentImage = images.length > 0 ? images[currentImageIndex] : null
+  
 
-  /////// IMAGE NAVIGATION ///////
   const handlePrevImage = () => {
     if (images.length <= 1) return
-    setCurrentImageIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1))
+    setCurrentImageIndex(prev => (prev === 0 ? images.length - 1 : prev - 1))
   }
 
   const handleNextImage = () => {
     if (images.length <= 1) return
-    setCurrentImageIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1))
+    setCurrentImageIndex(prev => (prev + 1) % images.length)
   }
+  
 
-  /////// HANDLE SHOW MORE ///////
+  const getDescription = () => {
+
+    if (loading) return "Loading..."
+    // THE DESCRIPTION WAS SHOWING A <p> Tag so i google this and copy it lol 
+  //https://stackoverflow.com/questions/71749369/how-to-remove-p-tag-on-api-while-fetching-the-data-in-react
+    if (expanded && gameDetails?.description) {
+      return gameDetails.description.replace(/<(.|\n)*?>/g, '')
+    }
+    
+    let desc = game.description || ""
+    desc = desc.replace(/<(.|\n)*?>/g, '')
+    
+    return desc.length > 150 && !expanded 
+      ? desc.substring(0, 150) + "..." 
+      : desc
+  }
+  
   const handleShowMore = async () => {
-    
-    if (expanded) {
-      setExpanded(false)
+ 
+    if (gameDetails || expanded) {
+      setExpanded(!expanded)
       return
     }
     
-
-    if (gameDetails) {
-      setExpanded(true)
-      return
-    }
-    
-
     try {
       setLoading(true)
       const details = await gameService.getGameDetails(game.id)
       setGameDetails(details)
-      
-     
-      if (details.screenshots && details.screenshots.length > 0) {
-        let updatedImages = [...images]
-        
-        details.screenshots.forEach(screenshot => {
-          if (screenshot.image) {
-         
-            const exists = updatedImages.some(img => img.src === screenshot.image)
-            if (!exists) {
-              updatedImages.push({
-                src: screenshot.image,
-                alt: `${game.name} screenshot`
-              })
-            }
-          }
-        })
-        
-        setImages(updatedImages)
-      }
-      
       setExpanded(true)
     } catch (error) {
       console.error("Failed to load game details:", error)
@@ -128,11 +88,11 @@ const GameCard = ({ game, onLike, onDislike, showActions = true }) => {
   return (
     <div className="game-card">
       <div className="game-card-media">
-        {images.length > 0 ? (
+        {currentImage ? (
           <>
             <img 
-              src={images[currentImageIndex].src} 
-              alt={images[currentImageIndex].alt || game.name} 
+              src={currentImage.src} 
+              alt={currentImage.alt || game.name} 
               className="game-card-image" 
             />
             
@@ -185,7 +145,7 @@ const GameCard = ({ game, onLike, onDislike, showActions = true }) => {
         )}
         
         <p className="game-card-description">
-          {getDisplayDescription()}
+          {getDescription()}
         </p>
         
         <div className="game-card-actions">

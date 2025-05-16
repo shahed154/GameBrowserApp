@@ -34,7 +34,7 @@ export const getGames = async (page = 1) =>
     });
     
 
-    return response.data.results;
+   return response.data.results;
   } catch (error) {
     console.error("Error getting games from RAWG:", error)
     throw new Error(`Failed to get games`)
