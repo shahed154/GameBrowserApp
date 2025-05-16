@@ -14,7 +14,7 @@ export const UserProvider = ({ children }) =>
   useEffect(() => 
     
     {
-    /////// CHECK USER STATE //////
+    //// CHECK USER STATE ////
     const checkUser = () => 
       {
       const savedUser = localStorage.getItem('gameUser')
@@ -28,7 +28,7 @@ export const UserProvider = ({ children }) =>
 
     checkUser()
   }, [])
-
+  
   ///// LOGIN OR CREATE USER ///////
 
   const loginOrCreate = async (username) => 

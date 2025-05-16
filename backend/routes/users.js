@@ -58,6 +58,33 @@ router.post('/preference', async (req, res) => {
   }
 })
 
+//// DELETE LIKED GAME
+router.delete('/liked-game/:userId/:gameId', async (req, res) => {
+  try {
+    const userId = req.params.userId;
+    const gameId = Number(req.params.gameId);
+    
+    const user = await User.findById(userId);
+    
+    if (!user) {
+      return res.status(404).json({ message: "USER NOT FOUND" });
+    }
+    
+    // Remove the game from liked games array
+    user.likedGames = user.likedGames.filter(id => id !== gameId);
+    
+    await user.save();
+    
+    res.json({ 
+      message: "Game removed from liked games", 
+      likedGames: user.likedGames 
+    });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server error');
+  }
+});
+
 // LOGIN OR CREATE USER
 router.post('/login-or-create', async (req, res) => 
   {
@@ -113,7 +140,7 @@ const username = req.body.username;
  
 
 // was going to use JWT for authentication but gave up 
-// TO DO : FINISH JWT FOR LOG IN AND REGISTERING 
+// TO DO : FINISH JWT FOR LOG IN AND REGISTERINGH
 
 // router.post("/register", async (req, res) => 
 // {

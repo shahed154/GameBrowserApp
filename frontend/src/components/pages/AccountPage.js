@@ -10,7 +10,7 @@ const AccountPage = () => {
   
   const { loginOrCreate, isAuthenticated } = useContext(UserContext)
   
-  /////////// ACCOUNT HANDLER ///////////
+  ///// ACCOUNT HANDLER ///////
   const handleSubmit = async (e) => {
     e.preventDefault()
     

@@ -8,8 +8,9 @@ const api = axios.create({
     'Content-Type': 'application/json',
   },
 })
-
-/////////////////// GAME API SERVICES ///////////////////
+///////////////////////////////////////////////////////
+//////////////// GAME API SERVICES //////////////////
+////////////////////////////////////////////////////
 export const gameService = {
   getTrendingGames: async (page = 1) => {
     try {
@@ -105,6 +106,17 @@ export const gameService = {
       return response.data
     } catch (error) {
       console.error('Error logging in or creating user:', error)
+      throw error
+    }
+  },
+  
+  removeLikedGame: async (gameId, userId) => {
+    try {
+      console.log(`Removing game ${gameId} from user ${userId}'s liked games`)
+      const response = await api.delete(`/api/users/liked-game/${userId}/${gameId}`)
+      return response.data
+    } catch (error) {
+      console.error('Error removing liked game:', error)
       throw error
     }
   }

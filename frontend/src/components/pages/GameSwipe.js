@@ -13,7 +13,7 @@ const GameSwipe = () =>
   const [error, setError] = useState("")
   const { currentUser, isAuthenticated } = useContext(UserContext)
 
-  ///////////////////// INITIAL GAME LOAD /////////////////////
+  //////// INITIAL GAME LOAD //////////
   useEffect(() => {
     const fetchGames = async () => {
       try {
@@ -41,7 +41,7 @@ const GameSwipe = () =>
     fetchGames()
   }, []) 
 
-  ////// HANDLE GAME PREFERENCES //////
+  ////// HANDLE GAME PREFERENCES /////
   const handleLike = async () => {
     if (!isAuthenticated) {
       alert('Please login to save your preferences')
@@ -65,7 +65,7 @@ const GameSwipe = () =>
 
   const handleDislike = async () => {
     if (!isAuthenticated) {
-      alert("Please login to save your preferences")
+      alert('Please login to save your preferences')
       moveToNextGame()
       return
     }
@@ -84,7 +84,7 @@ const GameSwipe = () =>
     }
   }
 
-  ///// MOVE TO NEXT GAME /////
+  //// MOVE TO NEXT GAME /////
   const moveToNextGame = () => {
     if (nextGames.length > 0) {
       setCurrentGame(nextGames[0])
@@ -163,8 +163,8 @@ const GameSwipe = () =>
                 </div>
               ) : (
                 <div className="no-games-message">
-                  <h3>No more games to show right now</h3>
-                  <p>Check back later for more recommendations!</p>
+                  <h3>No more gamess to show</h3>
+                  <p>Come back later for more recommendations!</p>
                 </div>
               )}
             </>

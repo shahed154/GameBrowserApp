@@ -10,7 +10,7 @@ const Home = () => {
   const [error, setError] = useState("")
   const { currentUser, isAuthenticated } = useContext(UserContext)
 
-  //////////////////// FETCH RECENT POPULAR GAMES ////////////////////
+  //////// FETCH RECENT POPULAR GAMES /////////////
   useEffect(() => {
     const fetchGames = async () => {
       try {
@@ -33,7 +33,7 @@ const Home = () => {
     fetchGames()
   }, [])
 
-  ///////////// HANDLE PREFERENCES /////////////
+  ////////// HANDLE PREFERENCES ////
   const handleLike = async (gameId) => {
     if (!isAuthenticated) {
       alert('Please create an account to save your preferences')

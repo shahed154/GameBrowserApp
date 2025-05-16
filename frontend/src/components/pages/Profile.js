@@ -11,6 +11,8 @@ const Profile = () => {
   const [loadingGames, setLoadingGames] = useState(true)
 
   //////////////// FETCH LIKED GAMES ////////////////
+
+
   useEffect(() => {
     const fetchLikedGames = async () => {
       if (!isAuthenticated || !currentUser) return
@@ -32,9 +34,11 @@ const Profile = () => {
   }, [currentUser, isAuthenticated])
 
   /////// HANDLE REMOVING LIKED GAME ///////
+
+  
   const handleRemoveLike = async (gameId) => {
     try {
-      await gameService.saveGamePreference(gameId, false, currentUser._id)
+      await gameService.removeLikedGame(gameId, currentUser._id)
       setLikedGames(prevGames => 
         prevGames.filter(game => game.id !== gameId)
       )

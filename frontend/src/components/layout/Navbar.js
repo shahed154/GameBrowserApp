@@ -6,7 +6,7 @@ import './Navbar.css'
 const Navbar = () => {
   const { currentUser, isAuthenticated, logout } = useContext(UserContext)
 
-  /////// LOGOUT HANDLER ///////
+  ///// LOGOUT HANDLER /////
   const handleLogout = () => {
     logout()
   }
